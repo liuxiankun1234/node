@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AAA</title>
+	<link rel="stylesheet" href="">
+	<style>
+		.mask{
+			width: 400px;
+			height: 600px;
+			background: #ccc;
+		}
+		#rock,
+		#scissor,
+		#paper{
+			width: 40px;
+			height: 80px;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="output" class="mask"></div>
+	<button id="rock">石头</button>
+	<button id="scissor">剪刀</button>
+	<button id="paper">布</button>
+
+
+
+<script>
+	const $button = {
+		rock: document.querySelector('#rock'),
+		scissor: document.querySelector('#scissor'),
+		paper: document.querySelector('#paper')
+	}
+
+	const $output = document.querySelector('#output');
+
+	Object.keys($button).forEach(key => {
+		$button[key].addEventListener('click', () => {
+			fetch(`${location.origin}/game?action=${key}`).then(res => {
+				return res.text();
+			}).then(text => {
+				$output.innerHTML += text + '<br/>'
+			})
+		})
+	})
+
+</script>
+</body>
+</html>
