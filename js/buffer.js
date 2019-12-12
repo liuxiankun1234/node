@@ -15,11 +15,17 @@
  * 
  *      Buffer对象
  *          类似数组 元素为16进制的两位数 即0~255的数值
- *          
+ *  
  * 
- *  注意：
- *      Buffer类在全局作用域中 因此无需使用require('buffer')
  * 
+ * 
+ *  buffer处理结构化数据的npm包
+ *      protocol-buffers（同JSON.stringify JSON.parse）
+ *          将数据处理成buffer格式 / 将buffer格式数据转换成数据结构
+ *
+ *  半双工通信
+ *  全双工通信
+ *  粘包(TCP优化问题)
  * 
  * 
 **/
@@ -36,7 +42,22 @@ const buffer3 = Buffer.alloc(20, 2)
 
 
 const buf = Buffer.from('hello world', 'ascii');
-console.log(buf.toString())
-console.log(buf.toString('hex'));
+// console.log(buf.toString())
+// console.log(buf.toString('hex'));
 // 打印: 68656c6c6f20776f726c64
-console.log(buf.toString('base64'));
+// console.log(buf.toString('base64'));
+
+
+const fs = require('fs');
+const protoBuf = require('protocol-buffers');
+
+const message = protoBuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
+
+const scheme = message.Column.encode({
+    id: 1,
+    name: 'node.js',
+    price: 44.4
+})
+const data = message.Column.decode(scheme)
+console.log('data', data)
+// const buf = protoBuf

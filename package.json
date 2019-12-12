@@ -1,0 +1,22 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "什么是Node.js? \t官网描述 \tNode.js是一个基于Chrome V8引擎的JavaScript运行环境 \tNode.js使用了一个事件驱动 非阻塞式I/O的模型 轻量高效",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuxiankun1234/node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liuxiankun1234/node/issues"
+  },
+  "homepage": "https://github.com/liuxiankun1234/node#readme",
+  "dependencies": {
+    "protocol-buffers": "^4.1.0"
+  }
+}
