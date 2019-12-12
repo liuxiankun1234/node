@@ -26,8 +26,17 @@
 const buffer1 = Buffer.from('liuxiankun')
 const buffer2 = Buffer.from([1,2,3,4])
 
-const buffer3 = Buffer.alloc(20)
+const buffer3 = Buffer.alloc(20, 2)
 
-console.log(buffer1.length)
-console.log(buffer2)
-console.log(buffer3)
+// console.log(buffer1.length)
+// console.log(buffer2)
+// console.log(buffer3)
+
+
+
+
+const buf = Buffer.from('hello world', 'ascii');
+console.log(buf.toString())
+console.log(buf.toString('hex'));
+// 打印: 68656c6c6f20776f726c64
+console.log(buf.toString('base64'));
