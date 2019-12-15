@@ -59,6 +59,21 @@
  *              iconv
  *              iconv-lite
  *  Buffer的拼接
+ *      Buffer在使用场景中 通常是一段一段的方式传输 
+ *      data += chunk 隐藏了 data = data.toString() + chunk.toString() 过程
+ *      乱码是如何产生的
+ *          设置 highWaterMark: 11 会使得buffer的长度是11
+ *          buffer在utf-8编码时 中文占三个元素 所以前3个字是没有问题的 后两个元素不能形成文字 所以显示乱码 
+ *          任何宽字节字符串都有可能存在被截断的情况 只不过Buffer长度越大出现的概率越低
+ *      setEncoding() 和 string_decoder()
+ *          设置编码 仅支持 UTF-8 Base64 UCS-2/UTF-16LE
+ *          setEncoding()
+ *              可读流对象在内部设置了一个decoder对象 每次data事件通过该decoder对象进行Buffer到字符串的解码 然后传递给调用者 故设置编码后 data不再接收原始的Buffer对象
+ *          string_decoder()
+ *              仅截取3的倍数的字符 余数加到下一次调用的值上
+ *      正确拼接Buffer
+ *          将多个小Buffer对象进行拼接为一个Buffer对象 然后通过iconv-lite一类的模块进行转码
+ *          
  *  Buffer与性能
  *      在应用中我们通常会操作字符串 
  *      在网络中需要转成Buffer 以进行二进制数据传输
@@ -83,11 +98,12 @@
  * 
 **/
 
-
+// buffer拼接乱码问题
 const fs = require('fs');
 const rs = fs.createReadStream('tangshi.text', {
-    // highWaterMark: 45
+    highWaterMark: 11
 })
+rs.setEncoding('utf-8')
 let text = '';
 rs.on('data', chunk => {
     console.log(11111, chunk)
