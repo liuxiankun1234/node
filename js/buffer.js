@@ -73,7 +73,8 @@
  *              仅截取3的倍数的字符 余数加到下一次调用的值上
  *      正确拼接Buffer
  *          将多个小Buffer对象进行拼接为一个Buffer对象 然后通过iconv-lite一类的模块进行转码
- *          
+ *          正确的拼接方式
+ *              用一个数组来存储收到的所有Buffer片段并记录下所有片段的总长度 然后调用Buffer.concat方法生成一个合并的Buffer对象 
  *  Buffer与性能
  *      在应用中我们通常会操作字符串 
  *      在网络中需要转成Buffer 以进行二进制数据传输
@@ -91,10 +92,6 @@
  *                  highWaterMark设置对Buffer内存的分配和使用有一定的影响
  *                  highWaterMark设置过小 可能导致系统调用的次数过多
  *                  highWaterMark值越大 读取速度越快
- *            
- *              
- *              
- * 
  * 
 **/
 
@@ -106,28 +103,15 @@ const rs = fs.createReadStream('tangshi.text', {
 rs.setEncoding('utf-8')
 let text = '';
 rs.on('data', chunk => {
-    console.log(11111, chunk)
+    // console.log(11111, chunk)
     text += chunk
 })
 rs.on('end', () => {
-    console.log(text)
+    // console.log(text)
 })
 
 
 /**
- * 
- *  
- *      一个像Array的对象 用于操作字节
- * 
- *      模块结构
- *          Buffer是一个典型的JS和C++结合的模块 性能相关由C++实现 非性能相关由JS实现
- *          Buffer所占用的内存不是V8分配的 属于堆外内存 由于V8垃圾回收性能的影响 将常用的操作对象用更高效和专有的内存分配回收策略来管理是个不错的思路
- *          Buffer挂在到全局变量上 无需require('buffer')        
- * 
- *      Buffer对象
- *          
- *  
- * 
  * 
  * 
  *  buffer处理结构化数据的npm包
@@ -140,13 +124,13 @@ rs.on('end', () => {
  * 
  * 
 **/
-const buffer1 = Buffer.from('7468697320697320612074c3a97374', 'hex')
+// const buffer1 = Buffer.from('7468697320697320612074c3a97374', 'hex')
 // const buffer2 = Buffer.from([1,2,3,4])
 
-const buffer3 = Buffer.alloc(20, 12.9234343)
+// const buffer3 = Buffer.alloc(20, 12.9234343)
 
 // console.log('buffer1', buffer1.length, buffer1) // buffer1 10 <Buffer 6c 69 75 78 69 61 6e 6b 75 6e>
-console.log('buffer1111', buffer1.toString());
+// console.log('buffer1111', buffer1.toString());
 
 // console.log(buffer2)
 // console.log('buffer3', buffer3[0])
@@ -154,22 +138,31 @@ console.log('buffer1111', buffer1.toString());
 
 
 
-const buf = Buffer.from('hello world', 'ascii');
+// const buf = Buffer.from('hello world', 'ascii');
 // console.log(buf.toString())
 // console.log(buf.toString('hex'));
 // 打印: 68656c6c6f20776f726c64
 // console.log(buf.toString('base64'));
 
 
-const protoBuf = require('protocol-buffers');
+// const protoBuf = require('protocol-buffers');
 
-const message = protoBuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
+// const message = protoBuf(fs.readFileSync(__dirname + '/test.proto', 'utf-8'))
 
-const scheme = message.Column.encode({
-    id: 1,
-    name: 'node.js',
-    price: 44.4
-})
-const data = message.Column.decode(scheme)
+// const scheme = message.Column.encode({
+//     id: 1,
+//     name: 'node.js',
+//     price: 44.4
+// })
+// const data = message.Column.decode(scheme)
 // console.log('data', data)
 // const buf = protoBuf
+
+
+
+
+
+// Buffer与字符编码
+const buffer = Buffer.from('6c69757869616e6b756e', 'hex');
+console.log('buffer', buffer.toString())
+console.log(Buffer.from('12') instanceof Uint8Array )
