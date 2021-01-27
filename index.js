@@ -8,7 +8,10 @@
  *	洋葱模型
  *	调用栈
 **/
-
+console.log(
+	typeof exports != "undefined" ,
+	 !exports.nodeType
+)
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
@@ -17,6 +20,7 @@ const game = require('./js/game');
 
 http.createServer((request, response) => {
 	const urlPase = url.parse(request.url)
+	const query = querystring.parse(urlPase.query)
 
 	if(urlPase.pathname === '/favicon.ico'){
 		response.writeHead(200);
@@ -30,7 +34,7 @@ http.createServer((request, response) => {
 	}
 
 	if(urlPase.pathname === '/game'){
-		const action = querystring.parse(urlPase.query).action
+		const action = query.action
 		const result = game(action);
 		console.log()
 
@@ -44,6 +48,15 @@ http.createServer((request, response) => {
 			response.writeHead(200);
 			response.end('你输了');
 		}
+	}
+
+	if(urlPase.pathname === '/jsonp') {
+		const callback = query.callback;
+		response.writeHead(200, {
+			'Content-Type': 'text/plain'
+		});
+		response.end(`${callback}({data: {}, code: 0, msg: 'OK'})`);
+		// response.end('你输了');
 	}
 
 

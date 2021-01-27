@@ -47,6 +47,25 @@
 		})
 	})
 
+	function ABD(data) {
+		console.log('ABD1 执行', data)
+	}
+	var script = document.createElement('script');
+
+	script.src = '/jsonp?callback=ABD'
+
+	document.body.appendChild(script)
+
+
+	// var xhr = new XMLHttpRequest();
+	// xhr.onreadystatechange = function() {
+	// 	if(xhr.readyState === 4 && xhr.status === 200) {
+	// 		eval(xhr.response)
+	// 	}
+	// }
+	// xhr.open('get', '/jsonp?callback=ABD', false);
+	// xhr.send(null);
+
 </script>
 </body>
 </html>
