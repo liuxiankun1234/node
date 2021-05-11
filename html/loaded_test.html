@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link rel="stylesheet" href="../css/index.css">
+
+	<style>
+		body{
+			background-color: pink;
+		}
+	</style>
+	<title>test</title>
+</head>
+<body>
+	<dl>
+		<dt>CSS文件与JS文件加载阻塞问题</dt>
+		<dd>1.link标签加载不会阻塞DOM树的解析，DOM树解析和加载样式可以理解为并行触发，但是页面的渲染会等待样式加载，页面样式未加载完成不会渲染renderTree</dd>
+		<dd>2.script标签加载会阻塞当前script标签之后的DOM元素的解析，同时页面的渲染会等待JS文件加载，页面JS文件未加载完成不会渲染renderTree</dd>
+		<dd>3.在link和script标签之前已经解析的DOM树不会被阻塞，DOM树解析一部分就渲染一部分</dd>
+
+		<dt>为什么将css文件前置，js文件后置呢?</dt>
+		<dd>
+			1、样式文件放置到body尾部的话会导致页面先没有styleSheet，之后样式加载完成之后会重新渲染 <br>
+			2、样式文件会阻塞页面渲染并且是页面展现的必要条件，所以应该优先加载完成
+			3、如果样式文件放置在js文件之后，会导致通过JavaScript获取元素内容样式失败 <br>
+			4、js文件后置，可以让用户优先看到页面 <br>
+		</dd>
+
+		<dt>猜测为什么css文件不会阻塞DOM树的解析，会阻塞渲染呢?</dt>
+		<dd>
+			1、样式文件与DOM树的解析不冲突，这里的不冲突是说样式文件不会改变DOM树的结构 <br>
+			2、如果DOM优先渲染，页面会导致用户先看到一个没有样式文件的结构，之后再看到一个渲染之后的文件
+		</dd>
+
+		
+		<dt>猜测为什么script会阻塞DOM树解析，并且阻塞渲染呢？</dt>
+		<dd>
+			1、js可以操作DOM元素，可能会修改DOM结构，所有解析到script标签阻塞就可以理解了
+		</dd>
+	</dl>
+
+
+	<div class="test">
+
+	</div>
+
+	<div>11</div>
+	<!-- <script src="../js/index.js"></script> -->
+</body>
+</html>
