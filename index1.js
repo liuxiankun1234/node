@@ -54,7 +54,7 @@ http.createServer((request, response) => {
             response.end(
                 fs.readFileSync(__dirname + '/css/index.css')
             );
-        }, 2000)
+        }, 7000)
     }
 
 
@@ -67,6 +67,6 @@ http.createServer((request, response) => {
             response.end(
                 fs.readFileSync(__dirname + '/js/index.js')
             );
-        }, 100000)
+        }, 5000)
     }
 }).listen(3001);

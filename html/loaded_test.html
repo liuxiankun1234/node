@@ -3,9 +3,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 	<link rel="stylesheet" href="../css/index.css">
-
+	<script>
+		var ss = Date.now()
+		window.addEventListener('DOMContentLoaded', function() {
+			console.log(
+				1111, Date.now() - ss
+			)
+		})
+	</script>
 	<style>
 		body{
 			background-color: pink;
@@ -14,11 +20,13 @@
 	<title>test</title>
 </head>
 <body>
+	<div onclick="alert(1)">btn</div>
 	<dl>
 		<dt>CSS文件与JS文件加载阻塞问题</dt>
 		<dd>1.link标签加载不会阻塞DOM树的解析，DOM树解析和加载样式可以理解为并行触发，但是页面的渲染会等待样式加载，页面样式未加载完成不会渲染renderTree</dd>
 		<dd>2.script标签加载会阻塞当前script标签之后的DOM元素的解析，同时页面的渲染会等待JS文件加载，页面JS文件未加载完成不会渲染renderTree</dd>
-		<dd>3.在link和script标签之前已经解析的DOM树不会被阻塞，DOM树解析一部分就渲染一部分</dd>
+		<dd>3.script标签只会在渲染之后才会执行，不会解析完成之后立即执行，在渲染之前只是一个扫描的状态</dd>
+		<dd>4.在link和script标签之前已经解析的DOM树不会被阻塞，DOM树解析一部分就渲染一部分</dd>
 
 		<dt>为什么将css文件前置，js文件后置呢?</dt>
 		<dd>
@@ -44,7 +52,7 @@
 		<dt>优化相关</dt>
 		<dd>
 			1、link标签支持媒体查询，如果有需求可以通过媒体查询进行分别加载
-			2、
+			2、link标签前置，script标签后置
 		</dd>
 	</dl>
 
@@ -53,7 +61,12 @@
 
 	</div>
 
-	<div>11</div>
-	<!-- <script src="../js/index.js"></script> -->
+	<section>
+		<dl>
+			<dt>DOMContentLoaded事件触发时机</dt>
+			<dd></dd>
+		</dl>
+	</section>
+	<script src="../js/index.js"></script>
 </body>
 </html>
