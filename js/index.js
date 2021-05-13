@@ -1,5 +1,3 @@
-var test = document.querySelector('.test')
-console.log(
-    111111111111111111,
-    test.getBoundingClientRect()
-)
+var width = document.querySelector('#btn').getBoundingClientRect().width;
+
+console.log(width);

@@ -7,3 +7,7 @@ body{
     height: 400px;
     background-color: pink;
 }
+
+#btn{
+   width: 100px
+}

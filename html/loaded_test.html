@@ -3,15 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" href="../css/index.css">
-	<script>
-		var ss = Date.now()
-		window.addEventListener('DOMContentLoaded', function() {
-			console.log(
-				1111, Date.now() - ss
-			)
-		})
-	</script>
 	<style>
 		body{
 			background-color: pink;
@@ -20,7 +11,7 @@
 	<title>test</title>
 </head>
 <body>
-	<div onclick="alert(1)">btn</div>
+	<div id="btn" onclick="alert(1)">btn</div>
 	<dl>
 		<dt>CSS文件与JS文件加载阻塞问题</dt>
 		<dd>1.link标签加载不会阻塞DOM树的解析，DOM树解析和加载样式可以理解为并行触发，但是页面的渲染会等待样式加载，页面样式未加载完成不会渲染renderTree</dd>
@@ -67,6 +58,8 @@
 			<dd></dd>
 		</dl>
 	</section>
+
 	<script src="../js/index.js"></script>
+	<link rel="stylesheet" href="../css/index.css">
 </body>
 </html>
