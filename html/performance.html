@@ -6,20 +6,42 @@
 </head>
 <body>
     <h1>性能指标</h1>
-
-
     知道性能指标的含义
+
     知道怎么优化各个节点的指标
-    
+        
     知道整个页面加载的流程
     在什么节点去优化这些性能指标
 
 
 	https://w3c.github.io/paint-timing/#intro
+    https://www.w3.org/TR/paint-timing/
+    https://web.dev/rail/
 
 
-    FMP(First Meaningful Paint)
-    FCP(First Contentful Paint)
+    性能指标含义
+        FP (First Paint)
+            浏览器首次向屏幕输入像素的时间，也可以理解为浏览器首次发生视觉变化的时间
+        FCP (First Contentful Paint)
+            浏览器首次渲染DOM内容，包括文本、图片、背景图、非白色的SVG或canvas元素
+        FMP (First Meaningful Paint)
+            第一次有意义的绘制，页面中'主要内容'开始出现在屏幕的时间点
+            https://web.dev/first-meaningful-paint/
+        FCI (First CPU Idel) alias FI (First Interactive)
+        TTI (Time to Interactive)
+        CI (Consistently Interactive Time)
+        FVC (First Visual Change)
+        LVC (Last Visual Change)
+        SI (Speed Index)
+        PSI (Perceptual Speed Index)
+        LCP (Largest Contentful Paint)
 
+    测量性能指标
+
+    性能指标的标准
+    性能指标低的原因在哪里
+    优化性能指标
+        https://web.dev/apply-instant-loading-with-prpl/
+        https://developer.yahoo.com/performance/rules.html
 </body>
 </html>
