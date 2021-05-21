@@ -27,15 +27,27 @@
         FMP (First Meaningful Paint)
             第一次有意义的绘制，页面中'主要内容'开始出现在屏幕的时间点
             https://web.dev/first-meaningful-paint/
-        FCI (First CPU Idel) alias FI (First Interactive)
+        FCI (First CPU Idle) alias FI (First Interactive)
+            第一次CPU空闲的时间，此时可以接收用户响应。
+            当页面是最小可交互状态，或者窗口是足够安静的处理用户输入
+            不必须是全部可见UI元素都可以交互
         TTI (Time to Interactive)
+            https://web.dev/tti/
+            非标准Web性能指标，TTI指标标识从页面开始加载到它主任务已经加载完成并且可以快速可靠的相应用户输入(页面包含有用的内容 主线程空闲)
         CI (Consistently Interactive Time)
-        FVC (First Visual Change)
-        LVC (Last Visual Change)
-        SI (Speed Index)
-        PSI (Perceptual Speed Index)
-        LCP (Largest Contentful Paint)
 
+        FVC (First Visual Change)
+
+        LVC (Last Visual Change)
+
+        SI (Speed Index)
+
+        PSI (Perceptual Speed Index)
+
+        LCP (Largest Contentful Paint)
+        
+        Long Task
+            https://developer.mozilla.org/en-US/docs/Web/API/Long_Tasks_API
     测量性能指标
 
     性能指标的标准
